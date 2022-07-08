@@ -79,7 +79,7 @@ fn chainsaw_rotation(game_state: &GameState, bot_position: &Position) -> Option<
 }
 
 fn adjacent_bot(game_state: &GameState, bot_position: &Position) -> Option<Direction> {
-  let adjacent = get_adjacent_positions(game_state, bot_position);
+  let adjacent = valid_adjacent_positions(game_state, bot_position);
 
   let maybe_adjacent_bot = adjacent.into_iter().find(|pos| is_bot(game_state, pos));
 
@@ -95,7 +95,7 @@ fn adjacent_bot(game_state: &GameState, bot_position: &Position) -> Option<Direc
 
 // Return a vector of the adjacent positions to the given one, in the form of (x, y) tuples
 // Careful! Don't return invalid positions (negative coordinates, or coordinates that exceed the map size)
-pub fn get_adjacent_positions(game_state: &GameState, position: &Position) -> Vec<Position> {
+pub fn valid_adjacent_positions(game_state: &GameState, position: &Position) -> Vec<Position> {
   let mut positions = vec![];
 
   if position.x > 0 {
@@ -231,7 +231,7 @@ pub fn find_shortest_path(
           return Ok(new_path);
       }
 
-      let adjacents = get_adjacent_positions(game_state, &current_pos);
+      let adjacents = valid_adjacent_positions(game_state, &current_pos);
 
       for adjacent_pos in adjacents {
           if !visited[adjacent_pos.x][adjacent_pos.y] {
