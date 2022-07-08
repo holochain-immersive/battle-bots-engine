@@ -20,7 +20,7 @@ pub fn yellow(
         Direction::Down => (x, sum(y, 1)),
         Direction::Up => (x, y - 1),
         Direction::Left => (x - 1, y),
-        Direction::Right => (x + 1, y),
+        Direction::Right => (sum(x, 1), y),
     };
 
     // Returns the shortest way to rotate the "from" direction to get the "to" direction
@@ -112,13 +112,13 @@ pub fn yellow(
     // Returns the direction that the to position is relative to the from position
     // eg: adjacent_positions_to_direction(Position { x: 0, y: 0 }, Position { x: 1, y: 0 }) == Direction::Right
     let adjacent_positions_to_direction = |from: &Position, to: &Position| {
-        if from.x + 1 == to.x && from.y == to.y {
+        if sum(from.x, 1) == to.x && from.y == to.y {
             return Ok(Direction::Right);
-        } else if from.x == to.x + 1 && from.y == to.y {
+        } else if from.x == sum(to.x, 1) && from.y == to.y {
             return Ok(Direction::Left);
-        } else if from.x == to.x && from.y + 1 == to.y {
+        } else if from.x == to.x && sum(from.y, 1) == to.y {
             return Ok(Direction::Up);
-        } else if from.x == to.x && from.y == to.y + 1 {
+        } else if from.x == to.x && from.y == sum(to.y, 1) {
             return Ok(Direction::Down);
         }
 
