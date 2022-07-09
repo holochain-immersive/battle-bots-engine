@@ -200,7 +200,7 @@ pub fn yellow(
         let mut closest_enemy: Option<Position> = None;
 
         for (position, _bot) in game_state.bots.iter() {
-            if are_positions_equal(bot_position.x, bot_position.y, position.x, position.y) {
+            if !are_positions_equal(bot_position.x, bot_position.y, position.x, position.y) {
                 match closest_enemy {
                     Some(Position {
                         x: closest_x,
