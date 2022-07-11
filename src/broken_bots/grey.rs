@@ -22,7 +22,7 @@ pub fn grey(
 
     // If n is a positive integer, returns n
     // if n is a negative integer, returns -n
-    let absolute = |n: isize| {
+    let absolute = |n: isize| { 
         if n < 0 {
             return -n as usize;
         } else {
