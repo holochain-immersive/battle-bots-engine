@@ -7,7 +7,7 @@ fn sum(a: usize, b: usize) -> usize {
 
 // Returns whether the two given position are the same position
 fn are_positions_equal(x1: usize, y1: usize, x2: usize, y2: usize) -> bool {
-    x1 != x2 || y1 != y2
+    x1 == x2 && y1 == y2
 }
 
 // Returns whether the position (x, y) is inside the map bounds
@@ -259,7 +259,7 @@ fn get_closest_enemy(
     let mut closest_enemy: Option<Position> = None;
 
     for (position, _bot) in game_state.bots.iter() {
-        if are_positions_equal(bot_position.x, bot_position.y, position.x, position.y) {
+        if !are_positions_equal(bot_position.x, bot_position.y, position.x, position.y) {
             match closest_enemy {
                 Some(Position {
                     x: closest_x,
