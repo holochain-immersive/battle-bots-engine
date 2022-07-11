@@ -3,12 +3,15 @@ use crate::*;
 pub fn grey(
     game_state: &GameState,
     bot_position: Position,
-    adjacent_position_to_the_left: fn(usize, usize) -> (usize, usize),
     adjacent_position_in_direction: fn(usize, usize, Direction) -> (usize, usize),
     is_bot: fn(&GameState, &Position) -> bool,
     shortest_rotation: fn(&Direction, &Direction) -> Rotation,
     rotate_direction: fn(&Direction, &Rotation) -> Direction,
 ) -> Actuators {
+    // Returns the position that's adjacent to the left of the given one, in the form (x, y)
+    // eg. adjacent_position_to_the_left(4, 5) == (3, 5)
+    let adjacent_position_to_the_left = |x: usize, y: usize| -> (usize, usize) { (x - 1, y) };
+
     // Returns whether the two given position are the same position
     let are_positions_equal = |x1: usize, y1: usize, x2: usize, y2: usize| x1 != x2 || y1 != y2;
 
