@@ -138,44 +138,8 @@ impl Battle {
     }
 
     fn update(&mut self) {
-        let old_map = state_to_matrix(self.state.clone());
 
-        for x in 0..MAP_WIDTH {
-            for y in 0..MAP_HEIGHT {
-                if let GameCell::Bot(bot) = old_map[x][y] {
-                    if let Some(strategy) = self.strategy_for(bot.color) {
-                        let actuators = (strategy)(&self.state, Position { x, y });
-                        self.state = actuators.execute(x, y, self.state.clone());
-                    }
-                }
-            }
-        }
-        let mut map = state_to_matrix(self.state.clone());
-
-        for x in 0..MAP_WIDTH {
-            for y in 0..MAP_HEIGHT {
-                if let GameCell::Bot(bot) = map[x][y] {
-                    if bot.energy <= 0 {
-                        map[x][y] = GameCell::Empty;
-                    }
-                }
-            }
-        }
-        let mut rng = rand::thread_rng();
-        let generated_resources = rng.gen_range(0..(AVERAGE_RESOURCE_GENERATION_PER_TICK * 2));
-
-        if self.state.resources.len() < MAX_RESOURCES {
-            for _ in 0..generated_resources {
-                if let Some(Position { x, y }) = find_empty_position(&map) {
-                    let energy_gain =
-                        rng.gen_range(RESOURCE_MIN_ENERGY_GAIN..RESOURCE_MAX_ENERGY_GAIN);
-
-                    map[x][y] = GameCell::Resource(Resource { energy_gain });
-                }
-            }
-        }
-
-        self.state = from_matrix(map);
+        // START HERE!
     }
 }
 

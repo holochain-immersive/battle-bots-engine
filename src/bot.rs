@@ -1,11 +1,11 @@
 use ruscii::terminal::Color;
 
+use super::constants::*;
 use super::{
     actuators::Actuators,
-    state::{GameState, Position},
     direction::Direction,
+    state::{GameState, Position},
 };
-use super::constants::*;
 
 pub type BotStrategy = fn(&GameState, Position) -> Actuators;
 
@@ -15,6 +15,7 @@ pub struct ColorConfig {
     pub strategy: BotStrategy,
 }
 
+#[derive(Clone, Copy)]
 pub struct Bot {
     pub energy: usize,
     pub color: Color,
@@ -22,4 +23,14 @@ pub struct Bot {
     pub shield_direction: Direction,
     pub tiredness: usize,
     pub shield_resistance: usize,
+}
+
+impl Bot {
+    pub fn new(color: Color) -> Bot {
+        unimplemented!()
+    }
+
+    pub fn is_shield_destroyed(&self) -> bool {
+        false
+    }
 }
