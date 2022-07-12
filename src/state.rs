@@ -7,13 +7,13 @@ pub enum GameCell {
     Resource(Resource),
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Position {
     pub x: usize,
     pub y: usize,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct GameState {
     pub map_width: usize,
     pub map_height: usize,

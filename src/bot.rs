@@ -15,7 +15,7 @@ pub struct ColorConfig {
     pub strategy: BotStrategy,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Bot {
     pub energy: usize,
     pub color: Color,
